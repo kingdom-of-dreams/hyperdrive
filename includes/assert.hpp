@@ -1,5 +1,5 @@
 /*
-   assert.h -- Hyperdrive's debug assertions.
+   assert.hpp -- Hyperdrive's debug assertions.
 
    Copyright 2025 by Sylvain Nieuwlandt (for Kingdom of Dreams)
 
@@ -15,10 +15,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef HD_ASSERT_H
-#define HD_ASSERT_H
+#ifndef HD_ASSERT_HPP
+#define HD_ASSERT_HPP
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,22 +29,18 @@
 */
 #ifdef _DEBUG
 #define HD_ASSERT(cond)                                                                                                     \
-   if (false == cond) {                                                                                                     \
-      printf("FAILURE : Assertion failed in %s (%s:%d) \n", __func__, __FILE__, __LINE__);                                  \
-      exit(1);                                                                                                              \
+   if (!(cond)) {                                                                                                           \
+      printf("ABORT : Assertion failed in %s at %s:%d \n", __func__, __FILE__, __LINE__);                                   \
+      abort();                                                                                                              \
    }
 #else
 #define HD_ASSERT(cond) (void)0;
 #endif
 
-/**
-   HD_ASSERT_OK assert that the given value is equals to 0.
-*/
-#define HD_ASSERT_OK(value) HD_ASSERT(value == 0)
+#define HD_ASSERT_OK(value) HD_ASSERT(value == HD::Codes::OK)
 
-/**
-   HD_ASSERT_NOT_NULL asserts that the given value isn't equals to NULL.
-*/
-#define HD_ASSERT_NOT_NULL(ptr) HD_ASSERT(ptr != NULL)
+#define HD_ASSERT_NOT_NULL(ptr) HD_ASSERT(ptr != nullptr)
 
-#endif
+#define HD_ASSERT_FAIL() HD_ASSERT(false)
+
+#endif // HD_ASSERT_HPP

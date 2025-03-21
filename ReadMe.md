@@ -2,7 +2,7 @@
 
 Another game engine. 
 
-## Why ? Why C ? Why another game engine ? WHY ?
+## Why ? Why another game engine ? WHY ?
 
 Yes we know, there's plenty of game engine out there (Unity, UnrealEngine, Godot to quote the most known). Each one of them will probably have more features than this one to be honest. But we thought that most of the games made with thoses can be _guessed_. How manu times you play a game and told yourself _Hmmm... Smells like Unity_ ? How many games suddenly acquires photorealistic stuff and great lightning since UE5 ? Did you ever found an asset in several games from different studio ?
 
@@ -13,8 +13,6 @@ For example, we want to focus on VR and performance, one of the first platform e
 Finally, we want to _learn_, and no better way to learn than doing each line of code by ourself with our own thought process, instead of just copy&paste tutorials and obscur lines from documentations.
 
 If we have some fun doing it, that's a bonus !
-
-Now about the `C` part : if we want to control the performance, we need to control the memory layout to the bit, and how instruction are executed and their order. This leaves us with two choice : C or Rust. Rust is fun, but badly supported by the Game platforms. And C, despite is _old age_, is still a language that is supported by anyone, with a standard which can be mark on a single postcard, so it will force us to Keep it Simple.
 
 ## How to build it
 

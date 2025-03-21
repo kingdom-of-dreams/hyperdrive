@@ -1,5 +1,5 @@
 /*
-   error.h -- Hyperdrive's supported error codes.
+   constants.hpp -- Hyperdrive's global constants.
 
    Copyright 2025 by Sylvain Nieuwlandt (for Kingdom of Dreams)
 
@@ -15,11 +15,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef HD_ERROR_H
-#define HD_ERROR_H
+#ifndef HD_CONSTANTS_HPP
+#define HD_CONSTANTS_HPP
 
-#define HD_OK 0
-#define HD_INVALID_ARG 1
-#define HD_PLATFORM_ERROR 2
+namespace HD {
+   typedef int Result;
 
-#endif
+   namespace Codes {
+      constexpr Result OK             = 0;
+      constexpr Result INVALID_ARG    = 1;
+      constexpr Result PLATFORM_ERROR = 2;
+   }; // namespace Codes
+}; // namespace HD
+
+#endif // HD_CONSTANTS_HPP
