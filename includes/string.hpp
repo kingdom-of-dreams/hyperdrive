@@ -6,13 +6,14 @@
 namespace HD {
    class String {
       public:
-         static String Snprintf(size_t size, const char* fmt, ...);
+         static String Snprintf(size_t size, const char* fmt...);
 
          String();
          String(const char* value, size_t maxSize = 0);
          virtual ~String();
 
          const char* ToCStr() const;
+         int         AsWideCStr(wchar_t* outbuffer, int bufferSize) const;
 
          HD::String& operator=(const HD::String& origin);
 

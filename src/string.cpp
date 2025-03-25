@@ -1,16 +1,17 @@
 #include <string.hpp>
 
-#include <vector>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
+#include <cwchar>
+#include <vector>
 
-HD::String HD::String::Snprintf(size_t size, const char* fmt, ...) {
+HD::String HD::String::Snprintf(size_t size, const char* fmt...) {
    HD::String result;
    result.nativeValue.assign(size + 1, '\0');
    va_list args;
    va_start(args, fmt);
-   (void) vsnprintf(result.nativeValue.data(), size, fmt, args);
+   (void)vsnprintf(result.nativeValue.data(), size, fmt, args);
    va_end(args);
 
    return result;
@@ -32,6 +33,15 @@ HD::String::~String() = default;
 
 const char* HD::String::ToCStr() const {
    return this->nativeValue.data();
+}
+
+int HD::String::AsWideCStr(wchar_t* outbuffer, int bufferSize) const {
+   if (nullptr == outbuffer || bufferSize <= 0) {
+      return -1;
+   }
+
+   memset(outbuffer, (wchar_t)'\0', bufferSize);
+   return swprintf(outbuffer, bufferSize, L"%hs", this->ToCStr());
 }
 
 HD::String& HD::String::operator=(const HD::String& origin) {

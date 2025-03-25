@@ -6,6 +6,7 @@
 #endif
 
 #include "constants.hpp"
+#include "string.hpp"
 
 namespace HD::Platform {
    class Window {
@@ -13,7 +14,7 @@ namespace HD::Platform {
          Window() : handle(nullptr), shown(false) {};
          virtual ~Window() = default;
 
-         virtual HD::Result Initialize(const char* title, int width, int height) {
+         virtual HD::Result Initialize(const HD::String& title, int width, int height) {
             return HD::Codes::OK;
          };
 
@@ -23,9 +24,14 @@ namespace HD::Platform {
          virtual int GetWidth() const {
             return 0;
          };
+
          virtual int GetHeight() const {
             return 0;
-         };
+         }
+
+         inline NATIVE_PLATFORM_WINDOW_TYPE GetHandle() const {
+            return this->handle;
+         }
 
          inline bool IsShown() const {
             return this->shown;

@@ -41,6 +41,8 @@
 
 #define HD_ASSERT_NOT_NULL(ptr) HD_ASSERT(ptr != nullptr)
 
+#define HD_ASSERT_POSITIVE(value) HD_ASSERT(float(value) > 0.0f)
+
 #define HD_ASSERT_FAIL() HD_ASSERT(false)
 
 #endif // HD_ASSERT_HPP

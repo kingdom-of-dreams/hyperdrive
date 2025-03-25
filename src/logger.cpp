@@ -22,6 +22,7 @@
 #include "platform/time.hpp"
 #include "string.hpp"
 
+#include <array>
 #include <cstdarg>
 #include <cstdio>
 #include <cstdlib>
@@ -43,32 +44,33 @@ namespace {
 #define GLOBAL_LOG(subject, level, msg)                                                                                     \
    va_list varargs = NULL;                                                                                                  \
    va_start(varargs, msg);                                                                                                  \
-   const HD::String message = HD::String::Snprintf(HD_MAX_LOGGER_MSG_SIZE, msg, varargs);                                   \
+   std::array<char, HD_MAX_LOGGER_MSG_SIZE> unwrappedMsg;                                                                   \
+   (void)vsnprintf(unwrappedMsg.data(), HD_MAX_LOGGER_MSG_SIZE, msg, varargs);                                              \
    va_end(varargs);                                                                                                         \
-   log(subject, level, message);
+   log(subject, level, HD::String(unwrappedMsg.data()));
 
 HD::Logger::Logger(const char* subjectName) {
    HD_ASSERT_NOT_NULL(subjectName);
    this->subject = HD::String(subjectName, HD_MAX_SUBJECT_SIZE);
 }
 
-void HD::Logger::Fatal(const char* msg, ...) const {
+void HD::Logger::Fatal(const char* msg...) const {
    HD_ASSERT_NOT_NULL(msg);
    GLOBAL_LOG(this->subject, "FATAL", msg);
    HD_ASSERT_FAIL(); // Force abort in debug.
 }
 
-void HD::Logger::Error(const char* msg, ...) const {
+void HD::Logger::Error(const char* msg...) const {
    HD_ASSERT_NOT_NULL(msg);
    GLOBAL_LOG(this->subject, "ERROR", msg);
 }
 
-void HD::Logger::Warn(const char* msg, ...) const {
+void HD::Logger::Warn(const char* msg...) const {
    HD_ASSERT_NOT_NULL(msg);
    GLOBAL_LOG(this->subject, "WARNING", msg);
 }
 
-void HD::Logger::Info(const char* msg, ...) const {
+void HD::Logger::Info(const char* msg...) const {
    HD_ASSERT_NOT_NULL(msg);
    GLOBAL_LOG(this->subject, "INFO", msg);
 }

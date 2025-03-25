@@ -62,7 +62,7 @@ namespace HD {
           * @param msg the message to log (supports printf format)
           * @param ... varargs for message's parameters.
           */
-         void Fatal(const char* msg, ...) const;
+         void Fatal(const char* msg...) const;
 
          /**
           * @brief Log the given message with an ERROR level.
@@ -73,7 +73,7 @@ namespace HD {
           * @param msg the message to log (supports printf format)
           * @param ... varargs for message's parameters.
           */
-         void Error(const char* msg, ...) const;
+         void Error(const char* msg...) const;
 
          /**
           * @brief Log the given message with a WARN level.
@@ -84,7 +84,7 @@ namespace HD {
           * @param msg the message to log (supports printf format)
           * @param ... varargs for message's parameters.
           */
-         void Warn(const char* msg, ...) const;
+         void Warn(const char* msg...) const;
 
          /**
           * @brief Log the given message with an INFO level.
@@ -95,7 +95,7 @@ namespace HD {
           * @param msg the message to log (supports printf format)
           * @param ... varargs for message's parameters.
           */
-         void Info(const char* msg, ...) const;
+         void Info(const char* msg...) const;
 
       private:
          HD::String subject;
