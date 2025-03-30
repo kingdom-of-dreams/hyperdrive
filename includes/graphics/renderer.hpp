@@ -1,5 +1,5 @@
 /*
-   constants.hpp -- Hyperdrive's global constants.
+   renderer.hpp -- Hyperdrive's interface to manipulate rendering systems.
 
    Copyright 2025 by Sylvain Nieuwlandt (for Kingdom of Dreams)
 
@@ -15,18 +15,24 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef HD_CONSTANTS_HPP
-#define HD_CONSTANTS_HPP
+#ifndef HD_GRAPHICS_RENDERER_HPP
+#define HD_GRAPHICS_RENDERER_HPP
 
-namespace HD {
-   typedef int Result;
+#include "constants.hpp"
+#include "platform/window.hpp"
 
-   namespace Codes {
-      constexpr Result OK             = 0;
-      constexpr Result INVALID_ARG    = 1;
-      constexpr Result PLATFORM_ERROR = 2;
-      constexpr Result RENDERER_ERROR = 3;
-   }; // namespace Codes
-}; // namespace HD
+namespace HD::Graphics {
+   class Renderer {
+      public:
+         Renderer()          = default;
+         virtual ~Renderer() = default;
 
-#endif // HD_CONSTANTS_HPP
+         virtual HD::Result Initialize(const HD::Platform::Window& window) {
+            return HD::Codes::OK;
+         }
+
+         virtual void Teardown() {}
+   };
+}; // namespace HD::Graphics
+
+#endif
